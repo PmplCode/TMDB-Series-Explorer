@@ -47,11 +47,11 @@
   .nav {
     display: flex;
     align-items: center;
-    gap: 2.5rem;
+    gap: 2rem;
 
     .navList {
       display: flex;
-      gap: 2rem;
+      gap: 1.5rem;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -87,14 +87,13 @@
     .searchForm {
       display: flex;
       gap: 0.5rem;
-      position: relative;
 
       .searchInput {
-        padding: 0.6rem 1rem;
+        padding: 0.5rem 0.75rem;
         border: 1px solid transparent;
         border-radius: 6px;
-        font-size: 1rem;
-        width: 200px;
+        font-size: 0.95rem;
+        width: 180px;
         outline: none;
         background-color: rgba(255, 255, 255, 0.15);
         color: white;
@@ -107,12 +106,12 @@
         &:focus {
           background-color: rgba(255, 255, 255, 0.25);
           box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
-          width: 240px;
+          width: 200px;
         }
       }
 
       .searchButton {
-        padding: 0.6rem 1.2rem;
+        padding: 0.5rem 1rem;
         background-color: lighten(v.$primary-color, 15%);
         color: white;
         border: none;
@@ -137,61 +136,98 @@
   }
 
   @media (max-width: 768px) {
+    padding: 0.75rem 1.5rem;
+
     .wrapper {
-      flex-direction: column;
-      padding: 1rem;
-      gap: 1.5rem;
+      flex-direction: row;
+      gap: 1rem;
     }
 
     .logo {
-      margin-bottom: 0.5rem;
+      .logoLink {
+        font-size: 1.5rem;
+      }
     }
 
     .nav {
-      flex-direction: column;
-      width: 100%;
-      gap: 1.5rem;
+      gap: 1rem;
 
       .navList {
-        flex-direction: row;
-        justify-content: center;
-        gap: 1.5rem;
-        width: 100%;
-        margin-bottom: 0.5rem;
+        gap: 1rem;
+
+        .navLink {
+          font-size: 1rem;
+        }
       }
 
       .searchForm {
-        width: 100%;
-        flex-direction: row;
-        justify-content: center;
-
         .searchInput {
-          flex: 1;
-          width: auto;
-          max-width: none;
+          width: 150px;
+          padding: 0.4rem 0.6rem;
+          font-size: 0.9rem;
 
           &:focus {
-            width: auto;
+            width: 170px;
           }
+        }
+
+        .searchButton {
+          padding: 0.4rem 0.8rem;
+          font-size: 0.9rem;
         }
       }
     }
   }
 
   @media (max-width: 480px) {
+    padding: 0.5rem 1rem;
+
+    .wrapper {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .logo {
+      .logoLink {
+        font-size: 1.25rem;
+      }
+    }
+
     .nav {
+      width: 100%;
+      gap: 0.75rem;
+
       .navList {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
+        flex-direction: row;
+        justify-content: center;
+        gap: 0.75rem;
+
+        .navLink {
+          font-size: 0.9rem;
+          padding: 0.2rem 0;
+        }
       }
 
       .searchForm {
-        flex-direction: column;
+        width: 100%;
+        flex-direction: row;
+        gap: 0.3rem;
+
+        .searchInput {
+          width: 100%;
+          max-width: 200px;
+          padding: 0.35rem 0.5rem;
+          font-size: 0.85rem;
+
+          &:focus {
+            width: 100%;
+            max-width: 220px;
+          }
+        }
 
         .searchButton {
-          margin-top: 0.5rem;
-          width: 100%;
+          padding: 0.35rem 0.75rem;
+          font-size: 0.85rem;
         }
       }
     }
