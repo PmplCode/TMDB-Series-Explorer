@@ -1,3 +1,4 @@
+import { unstable_ViewTransition as ViewTransition } from "react";
 import { fetchSeries } from "@/services/tvApi";
 import { Suspense } from "react";
 import pageStyles from "@/styles/pages/home.module.scss";
@@ -17,15 +18,17 @@ export default async function Home({
   const seriesDataPromise = fetchSeries(currentPage);
 
   return (
-    <div className={pageStyles.container}>
-      <h1>Series Populares</h1>
-      <Suspense fallback={<Loading />}>
-        <SeriesList
-          seriesDataPromise={seriesDataPromise}
-          currentPage={currentPage}
-        />
-      </Suspense>
-    </div>
+    <ViewTransition>
+      <div className={pageStyles.container}>
+        <h1>Series Populares</h1>
+        <Suspense fallback={<Loading />}>
+          <SeriesList
+            seriesDataPromise={seriesDataPromise}
+            currentPage={currentPage}
+          />
+        </Suspense>
+      </div>
+    </ViewTransition>
   );
 }
 

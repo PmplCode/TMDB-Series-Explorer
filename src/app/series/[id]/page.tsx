@@ -1,3 +1,4 @@
+import { unstable_ViewTransition as ViewTransition } from "react";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import SeriesDetail from "@/components/features/SeriesDetail";
@@ -15,10 +16,11 @@ import { Series } from "@/types/series";
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
+  const { id } = await params;
   try {
-    const series = await fetchSeriesById(params.id);
+    const series = await fetchSeriesById(id);
     return {
       title: `${series.name} | Series Explorer`,
       description: series.summary?.slice(0, 150) || "Detalles de la serie",
@@ -34,12 +36,13 @@ export async function generateMetadata({
 export default async function SeriesPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
   const [series, similarSeries, recommendedSeries] = await Promise.all([
-    fetchSeriesById(params.id).catch(() => null),
-    fetchSimilarSeries(params.id),
-    fetchRecommendedSeries(params.id),
+    fetchSeriesById(id).catch(() => null),
+    fetchSimilarSeries(id),
+    fetchRecommendedSeries(id),
   ]);
 
   if (!series) {
@@ -47,27 +50,29 @@ export default async function SeriesPage({
   }
 
   return (
-    <div className={pageStyles.container}>
-      <SeriesDetail series={series} />
-      {!!similarSeries.length && (
-        <Suspense fallback={<Loading />}>
-          <SeriesSection
-            title="Series Similares"
-            seriesList={similarSeries}
-            className={pageStyles.section}
-          />
-        </Suspense>
-      )}
-      {!!recommendedSeries.length && (
-        <Suspense fallback={<Loading />}>
-          <SeriesSection
-            title="Series Recomendadas"
-            seriesList={recommendedSeries}
-            className={pageStyles.section}
-          />
-        </Suspense>
-      )}
-    </div>
+    <ViewTransition>
+      <div className={pageStyles.container}>
+        <SeriesDetail series={series} />
+        {!!similarSeries.length && (
+          <Suspense fallback={<Loading />}>
+            <SeriesSection
+              title="Series Similares"
+              seriesList={similarSeries}
+              className={pageStyles.section}
+            />
+          </Suspense>
+        )}
+        {!!recommendedSeries.length && (
+          <Suspense fallback={<Loading />}>
+            <SeriesSection
+              title="Series Recomendadas"
+              seriesList={recommendedSeries}
+              className={pageStyles.section}
+            />
+          </Suspense>
+        )}
+      </div>
+    </ViewTransition>
   );
 }
 

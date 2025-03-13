@@ -1,3 +1,4 @@
+import { unstable_ViewTransition as ViewTransition } from "react";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import SeriesCard from "@/components/features/SeriesCard";
@@ -10,22 +11,22 @@ import Pagination from "@/components/common/Pagination";
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: { query?: string; page?: string };
+  searchParams: Promise<{ query?: string; page?: string }>;
 }): Promise<Metadata> {
-  const query = searchParams.query || "";
+  const { query } = await searchParams;
   return {
-    title: `Buscando "${query}" | Series Explorer`,
-    description: `Resultados de búsqueda para "${query}"`,
+    title: `Buscando "${query || ""}" | Series Explorer`,
+    description: `Resultados de búsqueda para "${query || ""}"`,
   };
 }
 
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: { query?: string; page?: string };
+  searchParams: Promise<{ query?: string; page?: string }>;
 }) {
-  const query = searchParams.query || "";
-  const page = parseInt(searchParams.page || "1", 10);
+  const { query, page } = await searchParams;
+  const pageNumber = parseInt(page || "1", 10);
 
   if (!query) {
     return (
@@ -35,30 +36,32 @@ export default async function SearchPage({
     );
   }
 
-  const seriesData = await searchSeries(query, page);
+  const seriesData = await searchSeries(query, pageNumber);
 
   return (
-    <div className={pageStyles.container}>
-      <h1>Resultados para &quot;{query}&quot;</h1>
-      <Suspense fallback={<Loading />}>
-        <div className={cardStyles.grid}>
-          {!!seriesData.results.length ? (
-            seriesData.results.map((series) => (
-              <SeriesCard key={series.id} series={series} />
-            ))
-          ) : (
-            <p>No se encontraron series.</p>
+    <ViewTransition>
+      <div className={pageStyles.container}>
+        <h1>Resultados para &quot;{query}&quot;</h1>
+        <Suspense fallback={<Loading />}>
+          <div className={cardStyles.grid}>
+            {!!seriesData.results.length ? (
+              seriesData.results.map((series) => (
+                <SeriesCard key={series.id} series={series} />
+              ))
+            ) : (
+              <p>No se encontraron series.</p>
+            )}
+          </div>
+          {seriesData.total_pages !== 1 && (
+            <Pagination
+              currentPage={seriesData.page}
+              totalPages={seriesData.total_pages}
+              basePath="/search"
+              query={query}
+            />
           )}
-        </div>
-        {seriesData.total_pages !== 1 && (
-          <Pagination
-            currentPage={seriesData.page}
-            totalPages={seriesData.total_pages}
-            basePath="/search"
-            query={query}
-          />
-        )}
-      </Suspense>
-    </div>
+        </Suspense>
+      </div>
+    </ViewTransition>
   );
 }

@@ -1,6 +1,5 @@
 @use "../utils/variables" as v;
 
-// Start of Selection
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

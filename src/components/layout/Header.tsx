@@ -13,7 +13,7 @@ export default function Header() {
     e.preventDefault();
     if (searchTerm.trim()) {
       router.push(`/search?query=${encodeURIComponent(searchTerm)}`);
-      setSearchTerm(""); // Limpiar el input tras buscar
+      setSearchTerm("");
     }
   };
 
