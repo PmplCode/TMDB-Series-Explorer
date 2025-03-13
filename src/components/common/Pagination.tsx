@@ -32,7 +32,6 @@ export default function Pagination({
           className={`${styles.pageLink} ${styles.prevLink}`}
         >
           <span className={styles.arrow}>←</span>
-          <span className={styles.text}>Anterior</span>
         </Link>
       )}
 
@@ -79,7 +78,6 @@ export default function Pagination({
           href={buildUrl(nextPage)}
           className={`${styles.pageLink} ${styles.nextLink}`}
         >
-          <span className={styles.text}>Siguiente</span>
           <span className={styles.arrow}>→</span>
         </Link>
       )}

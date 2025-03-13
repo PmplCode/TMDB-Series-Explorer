@@ -7,6 +7,9 @@
   gap: 1rem;
   margin: 2rem 0;
   font-family: "Arial", sans-serif;
+  max-width: 100%;
+  overflow-x: hidden;
+  flex-wrap: wrap;
 }
 
 .pageLink {
@@ -18,12 +21,11 @@
   color: white;
   text-decoration: none;
   border-radius: 8px;
-  transition: background-color 0.3s ease, transform 0.1s ease;
+  transition: background-color 0.3s ease;
   font-weight: 500;
 
   &:hover {
     background-color: darken(v.$primary-color, v.$hover-darken);
-    transform: translateY(-2px);
   }
 
   &.prevLink {
@@ -74,4 +76,52 @@
 .ellipsis {
   padding: 0 0.5rem;
   color: v.$text-color;
+}
+
+@media (max-width: 768px) {
+  .pagination {
+    gap: 0.75rem;
+    padding: 0 1rem;
+  }
+
+  .pageLink {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .pageNumber {
+    min-width: 2rem;
+    height: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .arrow {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination {
+    gap: 0.5rem;
+    flex-direction: column;
+  }
+
+  .pageLink {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .pageNumbers {
+    gap: 0.3rem;
+  }
+
+  .pageNumber {
+    min-width: 1.8rem;
+    height: 1.8rem;
+    font-size: 0.85rem;
+  }
+
+  .ellipsis {
+    padding: 0 0.3rem;
+  }
 }
