@@ -1,0 +1,77 @@
+@use "../utils/variables" as v;
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  font-family: "Arial", sans-serif;
+}
+
+.pageLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: v.$primary-color;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  font-weight: 500;
+
+  &:hover {
+    background-color: darken(v.$primary-color, v.$hover-darken);
+    transform: translateY(-2px);
+  }
+
+  &.prevLink {
+    .arrow {
+      order: -1;
+    }
+  }
+
+  .arrow {
+    font-size: 1.2rem;
+  }
+
+  .text {
+    display: inline-block;
+  }
+}
+
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pageNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 0.5rem;
+  border-radius: 50%;
+  text-decoration: none;
+  color: v.$secondary-color;
+  transition: all 0.3s ease;
+
+  &:hover:not(.current) {
+    background-color: lighten(v.$primary-color, 40%);
+    color: v.$primary-color;
+  }
+
+  &.current {
+    background-color: v.$primary-color;
+    color: white;
+    font-weight: 600;
+  }
+}
+
+.ellipsis {
+  padding: 0 0.5rem;
+  color: v.$text-color;
+}

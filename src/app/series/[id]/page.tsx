@@ -1,0 +1,93 @@
+import { Metadata } from "next";
+import { Suspense } from "react";
+import SeriesDetail from "@/components/features/SeriesDetail";
+import SeriesCard from "@/components/features/SeriesCard";
+import {
+  fetchRecommendedSeries,
+  fetchSeriesById,
+  fetchSimilarSeries,
+} from "@/services/tvApi";
+import cardStyles from "@/styles/components/seriesCard.module.scss";
+import pageStyles from "@/styles/pages/seriesDetail.module.scss";
+import Loading from "@/components/common/Loading";
+import { Series } from "@/types/series";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  try {
+    const series = await fetchSeriesById(params.id);
+    return {
+      title: `${series.name} | Series Explorer`,
+      description: series.summary?.slice(0, 150) || "Detalles de la serie",
+    };
+  } catch {
+    return {
+      title: "Error | Series Explorer",
+      description: "No se pudo cargar los detalles de la serie.",
+    };
+  }
+}
+
+export default async function SeriesPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const [series, similarSeries, recommendedSeries] = await Promise.all([
+    fetchSeriesById(params.id).catch(() => null),
+    fetchSimilarSeries(params.id),
+    fetchRecommendedSeries(params.id),
+  ]);
+
+  if (!series) {
+    throw new Error("No se pudo cargar la serie solicitada.");
+  }
+
+  return (
+    <div className={pageStyles.container}>
+      <SeriesDetail series={series} />
+      {!!similarSeries.length && (
+        <Suspense fallback={<Loading />}>
+          <SeriesSection
+            title="Series Similares"
+            seriesList={similarSeries}
+            className={pageStyles.section}
+          />
+        </Suspense>
+      )}
+      {!!recommendedSeries.length && (
+        <Suspense fallback={<Loading />}>
+          <SeriesSection
+            title="Series Recomendadas"
+            seriesList={recommendedSeries}
+            className={pageStyles.section}
+          />
+        </Suspense>
+      )}
+    </div>
+  );
+}
+
+async function SeriesSection({
+  title,
+  seriesList,
+  className,
+}: {
+  title: string;
+  seriesList: Series[];
+  className?: string;
+}) {
+  return (
+    <section className={className}>
+      <h2>{title}</h2>
+      <div className={cardStyles.grid}>
+        {seriesList.map((series) => (
+          <SeriesCard key={series.id} series={series} />
+        ))}
+      </div>
+    </section>
+  );
+}

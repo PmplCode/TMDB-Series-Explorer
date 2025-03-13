@@ -1,0 +1,26 @@
+@use "../styles/utils/variables" as v;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: var(--font-geist-sans), sans-serif;
+  color: v.$text-color;
+  background-color: v.$bg-color;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  padding: 2rem 0;
+}

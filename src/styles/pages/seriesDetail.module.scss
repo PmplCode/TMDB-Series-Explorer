@@ -1,0 +1,17 @@
+@use "../utils/variables" as v;
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  margin: 2rem 0;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: v.$text-color;
+  }
+}

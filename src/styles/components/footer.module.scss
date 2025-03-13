@@ -1,0 +1,32 @@
+@use "../utils/variables" as v;
+
+.footer {
+  background-color: v.$primary-color;
+  color: white;
+  padding: 1.5rem 1rem;
+  border-top: 3px solid lighten(v.$primary-color, 15%);
+  font-family: "Arial", sans-serif;
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.copyright {
+  font-size: 0.9rem;
+  margin: 0;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 1rem;
+  }
+
+  .copyright {
+    font-size: 0.85rem;
+  }
+}

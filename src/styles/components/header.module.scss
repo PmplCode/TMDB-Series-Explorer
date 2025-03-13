@@ -1,0 +1,199 @@
+@use "../utils/variables" as v;
+
+.header {
+  padding: 1rem 2rem;
+  background-color: v.$primary-color;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    .logoLink {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+      position: relative;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: white;
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+
+    .navList {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        .navLink {
+          color: white;
+          text-decoration: none;
+          font-size: 1.1rem;
+          font-weight: 500;
+          position: relative;
+          padding: 0.25rem 0;
+          transition: all 0.3s ease;
+
+          &::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+          }
+
+          &:hover::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .searchForm {
+      display: flex;
+      gap: 0.5rem;
+      position: relative;
+
+      .searchInput {
+        padding: 0.6rem 1rem;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        font-size: 1rem;
+        width: 200px;
+        outline: none;
+        background-color: rgba(255, 255, 255, 0.15);
+        color: white;
+        transition: all 0.3s ease;
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        &:focus {
+          background-color: rgba(255, 255, 255, 0.25);
+          box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+          width: 240px;
+        }
+      }
+
+      .searchButton {
+        padding: 0.6rem 1.2rem;
+        background-color: lighten(v.$primary-color, 15%);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        &:hover {
+          background-color: lighten(v.$primary-color, 25%);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        &:active {
+          transform: translateY(0);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .wrapper {
+      flex-direction: column;
+      padding: 1rem;
+      gap: 1.5rem;
+    }
+
+    .logo {
+      margin-bottom: 0.5rem;
+    }
+
+    .nav {
+      flex-direction: column;
+      width: 100%;
+      gap: 1.5rem;
+
+      .navList {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.5rem;
+        width: 100%;
+        margin-bottom: 0.5rem;
+      }
+
+      .searchForm {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+
+        .searchInput {
+          flex: 1;
+          width: auto;
+          max-width: none;
+
+          &:focus {
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav {
+      .navList {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .searchForm {
+        flex-direction: column;
+
+        .searchButton {
+          margin-top: 0.5rem;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

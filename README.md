@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Series Explorer
 
-## Getting Started
+## Descripción
 
-First, run the development server:
+Series Explorer es una aplicación web moderna desarrollada con Next.js que permite a los usuarios explorar, buscar y descubrir series de televisión. La aplicación utiliza la API de TMDB (The Movie Database) para proporcionar información actualizada sobre series populares, recomendaciones y detalles específicos de cada serie.
+
+## Características
+
+- **Exploración de series populares**: Visualiza las series más populares del momento
+- **Búsqueda avanzada**: Encuentra series por nombre o palabras clave
+- **Detalles completos**: Accede a información detallada de cada serie, incluyendo:
+  - Sinopsis
+  - Fecha de estreno
+  - Número de temporadas y episodios
+  - Géneros
+  - Calificación
+  - Estado actual
+- **Recomendaciones personalizadas**: Descubre series similares y recomendadas basadas en tus intereses
+- **Interfaz responsiva**: Disfruta de una experiencia de usuario óptima en cualquier dispositivo
+
+## Tecnologías utilizadas
+
+- **Next.js 15.2.2**: Framework de React para aplicaciones web
+- **React 19**: Biblioteca JavaScript para construir interfaces de usuario
+- **TypeScript**: Superset de JavaScript con tipado estático
+- **SASS**: Preprocesador CSS para estilos avanzados
+- **API de TMDB**: Fuente de datos para información de series
+
+## Requisitos previos
+
+- Node.js v22.13.0 o superior
+- NPM o Yarn
+
+## Instalación
+
+1. Clona el repositorio:
+
+   ```bash
+   git clone https://github.com/tu-usuario/my-series-app.git
+   cd my-series-app
+   ```
+
+2. Instala las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+3. Crea un archivo `.env.local` en la raíz del proyecto y añade tu clave API de TMDB:
+
+   ```
+   NEXT_PUBLIC_TMDB_API_KEY=tu_clave_api_aquí
+   ```
+
+   Puedes obtener una clave API registrándote en [TMDB](https://www.themoviedb.org/documentation/api).
+
+## Uso
+
+### Desarrollo
+
+Para iniciar el servidor de desarrollo:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+La aplicación estará disponible en [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Producción
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Para construir la aplicación para producción:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+Para iniciar el servidor de producción:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Estructura del proyecto
 
-## Deploy on Vercel
+```
+my-series-app/
+├── src/
+│   ├── app/                  # Rutas y páginas de la aplicación
+│   ├── components/           # Componentes reutilizables
+│   ├── services/             # Servicios para API y lógica de negocio
+│   ├── styles/               # Estilos SCSS
+│   └── types/                # Definiciones de tipos TypeScript
+├── public/                   # Archivos estáticos
+└── ...
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contribución
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Si deseas contribuir a este proyecto, por favor:
+
+1. Haz un fork del repositorio
+2. Crea una rama para tu característica (`git checkout -b feature/nueva-caracteristica`)
+3. Realiza tus cambios y haz commit (`git commit -m 'Añadir nueva característica'`)
+4. Sube los cambios a tu fork (`git push origin feature/nueva-caracteristica`)
+5. Abre un Pull Request
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo LICENSE para más detalles.
+
+## Contacto
+
+Para cualquier consulta o sugerencia, no dudes en contactar con el equipo de desarrollo.
+
+---
+
+Desarrollado con ❤️ usando Next.js y React.

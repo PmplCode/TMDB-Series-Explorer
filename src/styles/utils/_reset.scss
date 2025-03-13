@@ -1,0 +1,200 @@
+// Reset Template SCSS
+// Purpose: Normalize styles, enhance accessibility, and ensure inclusivity
+
+// 1. Box-sizing reset for consistent layout calculations
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// 2. Remove default browser styles and improve accessibility
+html {
+  // Ensure smooth scrolling for all users
+  scroll-behavior: smooth;
+  // Set a base font size for rem units (62.5% = 10px for easier calculations)
+  font-size: 62.5%;
+  // Prevent text size inflation on mobile
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  // Default font settings for readability
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.6rem; // 16px base size
+  line-height: 1.5;
+  color: #333; // High contrast default color
+  background-color: #fff; // White background for clarity
+
+  // Prevent animations for users who prefer reduced motion (e.g., vestibular issues)
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// 3. Reset headings for consistency and accessibility
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700; // Bold by default
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+// 4. Improve form elements for all users
+input,
+button,
+textarea,
+select {
+  font: inherit; // Inherit font styles from body
+  color: inherit;
+  border: none;
+  background: none;
+  appearance: none; // Remove default browser styles
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  // Ensure focus states are visible for keyboard users
+  &:focus {
+    outline: 0.2rem solid #007bff; // High contrast focus ring
+    outline-offset: 0.2rem;
+  }
+}
+
+// 5. Accessibility enhancements
+// Ensure links are distinguishable for colorblind users
+a {
+  color: #0066cc;
+  text-decoration: underline; // Default underline for clarity
+  &:hover {
+    text-decoration: none; // Optional hover effect
+  }
+  &:focus {
+    outline: 0.2rem solid #007bff;
+    outline-offset: 0.2rem;
+  }
+}
+
+// 6. Media resets
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto; // Maintain aspect ratio
+}
+
+// 7. Prevent epilepsy triggers
+// Avoid flashing content with prefers-reduced-motion
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+}
+
+// 8. High contrast mode support for visually impaired users
+@media (prefers-contrast: high) {
+  body {
+    color: #000;
+    background-color: #fff;
+  }
+  a {
+    color: #0000ee;
+  }
+  input,
+  button,
+  textarea,
+  select {
+    border: 0.1rem solid #000;
+  }
+}
+
+// 9. Reset lists
+ul,
+ol {
+  list-style: none;
+}
+
+// 10. Tables reset for accessibility
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 0.8rem;
+  text-align: left;
+}
+
+// 11. Screen reader only class
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// 12. Remove default button styles
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+
+  // Ensure buttons are accessible
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+// 13. Miscellaneous resets
+blockquote,
+q {
+  quotes: none;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #ccc;
+  margin: 1rem 0;
+}
+
+// 14. Dark mode support
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #ddd;
+    background-color: #1a1a1a;
+  }
+  a {
+    color: #66b3ff;
+  }
+  hr {
+    background: #555;
+  }
+}
