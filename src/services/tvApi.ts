@@ -15,7 +15,7 @@ export const fetchSeries = async (
 ): Promise<SeriesResponse> => {
   const response = await fetch(
     `${BASE_URL}/tv/popular?language=es-ES&page=${page}&api_key=${API_KEY}`,
-    { cache: "no-store" } // Evita caché para datos frescos
+    { cache: "no-store" }
   );
   if (!response.ok) throw new Error("Error fetching popular series");
   const data = await response.json();
@@ -29,12 +29,12 @@ export const fetchSeries = async (
             medium: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
             original: `https://image.tmdb.org/t/p/original${item.poster_path}`,
           }
-        : undefined, // Devuelve undefined en lugar de una ruta estática para consistencia
+        : undefined,
       summary: item.overview || undefined,
-      genres: [], // Géneros no disponibles en este endpoint
+      genres: [],
       premiered: item.first_air_date || undefined,
     })),
-    total_pages: Math.min(data.total_pages, 500), // TMDB limita a 500 páginas
+    total_pages: Math.min(data.total_pages, 500),
     total_results: data.total_results,
   };
 };
@@ -96,7 +96,7 @@ export const fetchSimilarSeries = async (
         }
       : undefined,
     summary: item.overview || undefined,
-    genres: [], // Géneros no disponibles en este endpoint
+    genres: [],
     premiered: item.first_air_date || undefined,
   }));
 };
@@ -126,7 +126,7 @@ export const fetchRecommendedSeries = async (
         }
       : undefined,
     summary: item.overview || undefined,
-    genres: [], // Géneros no disponibles en este endpoint
+    genres: [],
     premiered: item.first_air_date || undefined,
   }));
 };
@@ -162,7 +162,7 @@ export const searchSeries = async (
           }
         : undefined,
       summary: item.overview || undefined,
-      genres: [], // Géneros no disponibles en este endpoint
+      genres: [],
       premiered: item.first_air_date || undefined,
     })),
     total_pages: data.total_pages,
