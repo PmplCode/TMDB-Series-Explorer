@@ -44,8 +44,8 @@ async function SeriesList({
   return (
     <>
       <div className={cardStyles.grid}>
-        {series.map((s) => (
-          <SeriesCard key={s.id} series={s} />
+        {series.map((s, index) => (
+          <SeriesCard key={s.id} series={s} index={index} />
         ))}
       </div>
       <Pagination totalPages={total_pages} currentPage={currentPage} />

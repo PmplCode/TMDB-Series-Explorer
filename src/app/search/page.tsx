@@ -45,8 +45,8 @@ export default async function SearchPage({
         <Suspense fallback={<Loading />}>
           <div className={cardStyles.grid}>
             {!!seriesData.results.length ? (
-              seriesData.results.map((series) => (
-                <SeriesCard key={series.id} series={series} />
+              seriesData.results.map((series, index) => (
+                <SeriesCard key={series.id} series={series} index={index} />
               ))
             ) : (
               <p>No se encontraron series.</p>

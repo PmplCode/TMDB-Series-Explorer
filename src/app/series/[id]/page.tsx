@@ -89,8 +89,8 @@ async function SeriesSection({
     <section className={className}>
       <h2>{title}</h2>
       <div className={cardStyles.grid}>
-        {seriesList.map((series) => (
-          <SeriesCard key={series.id} series={series} />
+        {seriesList.map((series, index) => (
+          <SeriesCard key={series.id} series={series} index={index} />
         ))}
       </div>
     </section>
